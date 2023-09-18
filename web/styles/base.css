@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /*Para quando utilizar
+    espaçamento, eles não influenciarem no tamanho total
+    dos elementos*/
+
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+
+}
+
+body {
+    background-color: #121214;
+    color: #fff;
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+
+    <!--Meta diz que o conteudo deve se ajustar ao formato da tela do dispositivo-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <title>Shorts Summary</title>
+  </head>
+  <body>
+    <div class="flex flex-col gap-6	items-center" id="app">
+      <img class="" src="/logo.svg" alt="Logo">
+      <h1 class="text-[#996dff] -mt-7 text-3xl	font-bold	">Shorts Summary</h1>
+    
+      <form class="mt-16 flex gap-4" id="form">
+        <input type="url" id="url" placeholder="URL do vídeo..."
+        class="h-12 w-[450px] border-none	text-white bg-[#202024]
+        rounded px-3 text-base focus:outline-none focus:outline-[#8257e5]
+        valid:bg-[#202024]	"> 
+        <button class="h-12 w-12 border-none rounded bg-[#8257e5]
+        cursor-pointer hover:bg-[#633bbc] transition" title="Resumir">
+          <i class="ph ph-play text-2xl  "></i>
+        </button>
+      </form>
+
+      <h2 class="self-start text-lg	font-bold mt-16">Resumo</h2>
+      <p id="content" class="self-start text-justify w-[512px] placeholder -mt-5">Escolha um short para resumir</p>
+    
+    </div>
+    <script type="module" src="web/main.js"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  </body>
+</html>
+ 
+
