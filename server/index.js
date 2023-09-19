@@ -20,7 +20,7 @@ app.get("/summary/:id", async (request, response) => { //Summary é a rota
 
     const audioConverted = await convert();  //Pega o resultado da função convert 
 
-    console.log(audioConverted);
+    console.log(audioConverted); //Conteudo que precisamos para passar para a I.A (Olhando na documentação o formato que a IA precisa para receber o audio)
 
     //Após terminar de fazer o download ele vai exeibir o resumo
     const result = await transcribe(); //Armazena o resultado que está sendo importasdo de transcribe.js
