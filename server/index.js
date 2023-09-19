@@ -2,28 +2,46 @@
 import cors from 'cors';
 import express from 'express';
 
-import { download } from './download.js'; 
-import { transcribe } from './transcribe.js';
-import { summarize } from './summarize.js'; 
+//Estamos dizendo que queremos importar a bibliteca cors e seu lugar de origem
+import { convert } from './convert.js'; //importando o convert
+import { download } from './download.js'; //Importando função de download
+import { transcribe } from './transcribe.js'; //Função responsável pela descrição
+import { summarize } from './summarize.js'; //Função responsável pelo resumo
 
-const app = express(); 
-app.use(express.json());
+const app = express(); //Inicializamos a biblioteca express dentro desta variavel
+app.use(express.json());//Fizemos isso para ele conseguir entender que vamos receber também conteudo no formato json no metodo post
 app.use(cors()); 
 
-app.get("/summary/:id", async (request, response) => { 
-    await download(request.params.id);
+//Definimos para ele recuperar o ID dos videos abaixo na função get
+//Quando tem : e um nome, ele já vai entender que id(ou qualquer nome) é um parametro
+app.get("/summary/:id", async (request, response) => { //Summary é a rota
+    await download(request.params.id); //donwload do video, aguarda a promessa ser atendida
+    //Para definir que essa será uma função assincrona, precisamos também ter definido que donwload em seu arquivo seja assincrono também
 
-    const result = await transcribe();
+    const audioConverted = await convert();  //Pega o resultado da função convert 
 
-    return response.json({ result }); 
-}) 
+    console.log(audioConverted);
 
-app.post("/sumarry", async (request, response) => { 
+    //Após terminar de fazer o download ele vai exeibir o resumo
+    const result = await transcribe(); //Armazena o resultado que está sendo importasdo de transcribe.js
+    
+    //Quando temos um cenario em que o nome da propiedade é o mesmo nome da variavel que está atribuindo valor, podemos deixar somente um dos nomes que ele irá entender 
+    return response.json({ result }); //Ao utilizar o json, ele já irá devolver como objeto e lá no front end conseguimos recuperar o conteudo desta propiedade
+}) //Aqui dizemos qual a ação que queremos receber uma solicitação
+//Também executa uma função, que recebe request parametro que contem todas as informações da requisição
+//Que foi feita pelo servidor.
 
-    const result = await summarize(request.body.text); 
+//Response usamos para devolver uma resposta para quem fez a solicitação
+//Metodo send devolve uma resposta
+//Dentro do parenteses estamos dizendo que queremos recuperar de dentro da requisição, o parametro recuperando i id
 
-    return response.json({ result }) 
+app.post("/summary", async (request, response) => { //Aqui ao invez de completar o endereço como no metodo acima '/:id' utilizamos
+    //Aqui a nossa rota vai passar o texto, para o nosso metodo de resumo para ele poder realizar o resumo;
+    const result = await summarize(request.body.text); //Aqui passamos para a função o texto, mas dessa vez pegando do corpo da função
+    //Dentro do nosso body vamos receber conteudos .json
+    return response.json({ result }) //Devolvemos o resultado
 })
 
 
-app.listen(3333, () => console.log('Server is running on port 3333')) 
+app.listen(3333, () => console.log('Server is running on port 3333')) //Inicializa o servidor, listen escuta as requisições e entre parenteses está a porta
+//Após a porta, ele executa uma função quando iniciar o servidor
