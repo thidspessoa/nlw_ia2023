@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+#É uma lista do que vai ignorar quando subir para o github

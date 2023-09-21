@@ -10,7 +10,7 @@ function recebeSubmit () {
     // Ouvinte de evento, para registrar quando ocorrer o submit dos dados do formulário
     // Recebe dois parametros, o primeiro é o evento que o ouvinte irá registrar
     // o segundo é a função que deve ocorrer quando o ouvinte registrar o evento
-    form.addEventListener('submit', async () => { //async aqui diz que essa função torna-se assincrona
+    form.addEventListener('submit', async (event) => { //async aqui diz que essa função torna-se assincrona
         //Por padrão, quando ocorre o evento de submit ele recarrega a página
         //E acaba perdendo a informação,
         
@@ -25,7 +25,7 @@ function recebeSubmit () {
         //Validação para saber se o vídeo é um shorts
         if (!videoURL.includes('shorts')) { //Metodo includes verifica se algo existe dentro da string
             window.alert('Error, format not suported :/');
-            return content.textContent = 'Esse vídeo não parece ser do formato permitido. Escolha outro vídeo e tente novamente!';
+            return (content.textContent = 'Esse vídeo não parece ser do formato permitido. Escolha outro vídeo e tente novamente!');
         };
         
         //pegar somente o ID do vídeo
@@ -57,7 +57,7 @@ function recebeSubmit () {
         }) //Agora vamos fazer o envio pelo corpo da requisição
         //Define um objeto com um parametro text, que foi denifido no const result do metodo post
     
-        content.textContent = summary.data.result;
+        content.textContent = summary.data.result; //exibi a transcrição do video
         content.classList.remove('placeholder') //Remove esssa classe que altera a cor e impede de tocar no conteudo
     })
 };
